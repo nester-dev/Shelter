@@ -1,0 +1,44 @@
+.not-only {
+	padding: 4.22% 0px 0px 0px;
+	// .not-only__container
+	&__container {
+		display: flex;
+		justify-content: space-between;
+	}
+	// .not-only__descr
+	&__descr {
+		max-width: 460px;
+		padding: 13.58777% 0px 0px 0px;
+	}
+	// .not-only__title
+	&__title {
+		max-width: 310px;
+		font-weight: 400;
+		font-size: 44px;
+		line-height: 130%;
+		color: #ffffff;
+		margin: 0px 0px 42px 0px;
+	}
+	// .not-only__text
+	&__text {
+		font-family: "Arial";
+		font-weight: 400;
+		font-size: 15px;
+		line-height: 160%;
+		color: #cdcdcd;
+		margin: 0px 0px 42px 0px;
+	}
+	// .not-only__image
+	&__image {
+		position: relative;
+		width: percent(698, 1200);
+		padding: 0px 0px 60.66% 0px;
+	}
+	&__img {
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		top: 0;
+		left: 0;
+	}
+}
