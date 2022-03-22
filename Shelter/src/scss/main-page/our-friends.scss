@@ -1,0 +1,13 @@
+.our-friends {
+	padding: 80px 0px 100px 0px;
+	// .our-friends__container
+	&__container {
+		text-align: center;
+	}
+	// .our-friends__title
+	&__title {
+		max-width: 400px;
+		margin: 0 auto 60px;
+		text-align: center;
+	}
+}

@@ -8,8 +8,13 @@
 	line-height: 130%;
 	letter-spacing: 0.06em;
 	color: #292929;
+	cursor: pointer;
 	transition: all 0.3s ease 0s;
 	&:hover {
 		background: #fddcc4;
+	}
+	&_light {
+		border: 2px solid #f1cdb3;
+		background: transparent;
 	}
 }
