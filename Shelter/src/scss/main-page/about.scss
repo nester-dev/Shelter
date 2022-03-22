@@ -1,0 +1,40 @@
+.about {
+	padding: 80px 0px 100px 0px;
+	// .about__container
+	&__container {
+		display: flex;
+		justify-content: center;
+	}
+	// .about__wrapper
+	&__wrapper {
+		display: flex;
+		column-gap: 120px;
+		justify-content: space-between;
+		align-items: center;
+	}
+	// .about__image
+	&__image {
+	}
+	// .about__img
+	&__img {
+	}
+	// .about__descr
+	&__descr {
+		max-width: 430px;
+	}
+	// .about__title
+	&__title {
+		max-width: 370px;
+	}
+	// .about__text
+	&__text {
+		font-family: "Arial";
+		font-weight: 400;
+		font-size: 15px;
+		line-height: 160%;
+		color: #4c4c4c;
+		&:nth-child(2) {
+			margin: 25px 0px 25px 0;
+		}
+	}
+}
