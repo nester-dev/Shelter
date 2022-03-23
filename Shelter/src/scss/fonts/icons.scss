@@ -14,3 +14,25 @@
 		display: block;
 	}
 }
+
+._icon-arrow:before {
+	content: "\e900";
+}
+._icon-credit-card:before {
+	content: "\e901";
+}
+._icon-location:before {
+	content: "\e902";
+	color: #f1cdb3;
+}
+._icon-mail:before {
+	content: "\e903";
+	color: #f1cdb3;
+}
+._icon-phone:before {
+	content: "\e904";
+	color: #f1cdb3;
+}
+._icon-slider-arrow:before {
+	content: "\e905";
+}
