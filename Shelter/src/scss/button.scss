@@ -17,4 +17,9 @@
 		border: 2px solid #f1cdb3;
 		background: transparent;
 	}
+	&_center {
+		@media (max-width: 991.98px) {
+			margin: 0 auto;
+		}
+	}
 }
