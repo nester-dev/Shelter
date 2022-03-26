@@ -6,4 +6,10 @@
 	align-items: center;
 	letter-spacing: 0.06em;
 	color: #545454;
+	@media (max-width: $mobileSmall) {
+		font-size: 25px;
+		letter-spacing: 0.06em;
+		text-align: center;
+		margin: 0 auto;
+	}
 }
