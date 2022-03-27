@@ -1,8 +1,5 @@
 .help {
 	padding: 80px 0px 100px 0px;
-	// .help__container
-	&__container {
-	}
 	// .help__title
 	&__title {
 		max-width: 310px;
@@ -15,6 +12,12 @@
 		flex-wrap: wrap;
 		gap: 55px 120px;
 		justify-content: center;
+		@media (max-width: $tablet) {
+			gap: 55px 60px;
+		}
+		@media (max-width: $mobileSmall) {
+			gap: 30px;
+		}
 	}
 }
 
@@ -26,6 +29,12 @@
 	justify-content: space-between;
 	align-items: center;
 	max-width: 170px;
+	@media (max-width: $tablet) {
+		width: 170px;
+	}
+	@media (max-width: $mobileSmall) {
+		width: 130px;
+	}
 	// .item__img
 	&__img {
 		width: 60px;
