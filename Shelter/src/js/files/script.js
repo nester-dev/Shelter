@@ -86,9 +86,15 @@ function burger() {
 
 	overlay.addEventListener('click', menuClose);
 
-	menuLinks.forEach(item => {
-		item.addEventListener('click', menuClose);
+	window.addEventListener('resize', () => {
+		if (window.innerWidth < 768) {
+			menuLinks.forEach(item => {
+				item.addEventListener('click', menuClose);
+			});
+		}
 	});
+
+
 }
 
 function moveLogo(delay) {
@@ -163,6 +169,6 @@ function slider() {
 	init();
 }
 
-slider();
 burger();
+slider();
 popup();
