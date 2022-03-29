@@ -25,15 +25,23 @@
 	&__content {
 		position: relative;
 		display: flex;
+		justify-content: space-between;
 		background: #fafafa;
 		border-radius: 9px;
-		column-gap: 30px;
-		width: 63.25%;
+		width: 64.25%;
 		height: 41.66%;
 		transform: perspective(500px) translate(0, -100%) rotateX(45deg);
 		transition: all 0.7s ease 0s;
 		opacity: 0;
 		cursor: auto;
+		@media (max-width: 1170px) {
+			width: 630px;
+			height: 350px;
+			gap: 11px;
+		}
+		@media (max-width: 730px) {
+			width: 240px;
+		}
 	}
 	// .popup__close
 	&__close {
@@ -56,13 +64,14 @@
 			background: #292929;
 			border-radius: 3px;
 		}
-
 		&:before {
 			transform: rotate(45deg);
 		}
-
 		&:after {
 			transform: rotate(-45deg);
+		}
+		@media (max-width: 730px) {
+			right: -30px;
 		}
 	}
 
@@ -71,6 +80,12 @@
 		position: relative;
 		width: 55.55%;
 		padding: 0px 0px 55.55% 0px;
+		@media (max-width: 1170px) {
+			width: 73.55%;
+		}
+		@media (max-width: 730px) {
+			display: none;
+		}
 	}
 	// .popup__img
 	&__img {
@@ -87,7 +102,17 @@
 	font-size: 15px;
 	line-height: 110%;
 	letter-spacing: 0.06em;
-	padding: 50px 0px 0px 0px;
+	padding: 5.56% 0px 0px 0px;
+	margin-right: 2.26%;
+	@media (max-width: 1170px) {
+		padding-top: 10px;
+		font-size: 13px;
+		margin-right: 9px;
+	}
+	@media (max-width: 730px) {
+		padding: 10px 10px 10px 10px;
+		margin-right: 0;
+	}
 	// .descr_link
 	&_link {
 		padding: 0px 0px 0px 14px;
@@ -109,11 +134,20 @@
 		span {
 			font-weight: 700;
 		}
+		@media (max-width: 1170px) {
+			font-size: 15px;
+			&:not(:last-child) {
+				margin: 0px 0px 6px 0px;
+			}
+		}
 	}
 	// .descr__name
 	&__name {
 		color: #000;
 		margin: 0px 0px 9px 0px;
+		@media (max-width: 730px) {
+			justify-content: center;
+		}
 	}
 	// .descr__breed
 	&__breed {
@@ -121,12 +155,27 @@
 		font-size: 20px;
 		line-height: 120%;
 		letter-spacing: 0.06em;
-		margin: 0px 0px 41px 0px;
+		margin: 0px 0px 11.55% 0px;
+		@media (max-width: 1170px) {
+			margin-bottom: 20px;
+		}
+		@media (max-width: 730px) {
+			text-align: center;
+		}
 	}
 	// .descr__text
 	&__text {
-		margin: 0px 0px 44px 0px;
+		max-width: 350px;
+		margin: 0px 0px 12.55% 0px;
+		@media (max-width: 1170px) {
+			margin-bottom: 20px;
+		}
+		@media (max-width: 730px) {
+			text-align: center;
+			text-align: justify;
+		}
 	}
+
 	// .descr__list
 	&__list {
 	}
