@@ -1,7 +1,14 @@
 //====================================================================================================
 .header {
+	&_our-pets {
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		padding: 30px 0px 30px 0px;
+	}
 	// .header_descr
-	&_descr {
+	&__descr {
 		font-family: "Arial";
 		font-style: normal;
 		font-weight: 400;
@@ -10,6 +17,9 @@
 		letter-spacing: 0.1em;
 		color: #ffffff;
 		text-align: center;
+		&_dark {
+			color: #292929;
+		}
 	}
 	// .header__container
 	&__container {
@@ -36,7 +46,11 @@
 		letter-spacing: 0.06em;
 		color: #f1cdb3;
 		margin: 0px 0px 9px 0px;
+		&_dark {
+			color: #545454;
+		}
 	}
+
 }
 .menu {
 	.overlay {
@@ -140,6 +154,12 @@
 				background: #f1cdb3;
 			}
 		}
+		&_dark {
+			color: #545454;
+			&:hover {
+				color: #292929;
+			}
+		}
 	}
 }
 
@@ -182,5 +202,20 @@
 		.menu-open & {
 			transform: rotate(90deg);
 		}
+	}
+}
+
+.menu-open {
+	.menu__link_dark {
+		color: #cdcdcd;
+	}
+	.menu__link_active {
+		color: #FAFAFA;
+	}
+	.header__title_dark {
+		color: #F1CDB3;
+	}
+	.header__descr_dark {
+		color: #FFFFFF;
 	}
 }

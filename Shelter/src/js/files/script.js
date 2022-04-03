@@ -6,15 +6,7 @@ import { flsModules } from "./modules.js";
 const body = document.querySelector("body"),
 	lockPaddingValue = window.innerWidth - document.querySelector('.wrapper').offsetWidth + "px",
 	menuLinks = document.querySelectorAll(".menu__link");
-
-function addLoadedClass() {
-	window.addEventListener("load", function () {
-		setTimeout(function () {
-			document.documentElement.classList.add('loaded');
-		}, 1000);
-	});
-
-}
+console.log(lockPaddingValue);
 
 function bodyLock(delay) {
 	setTimeout(function () {
@@ -36,6 +28,15 @@ function bodyUnlockToogle(delay) {
 	} else {
 		bodyLock();
 	}
+}
+
+function addLoadedClass() {
+	window.addEventListener("load", function () {
+		setTimeout(function () {
+			document.documentElement.classList.add('loaded');
+		}, 1000);
+	});
+
 }
 
 function popup() {
@@ -178,7 +179,7 @@ function slider() {
 	init();
 }
 
-addLoadedClass();
 burger();
+addLoadedClass();
 slider();
 popup();
