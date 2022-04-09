@@ -1,2 +1,3 @@
 # nester-dev-JSFE2022Q1
-Private repository for @nester-dev
+
+https://rolling-scopes-school.github.io/nester-dev-JSFE2022Q1/Shelter
