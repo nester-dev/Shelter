@@ -6,6 +6,8 @@
 		left: 0;
 		width: 100%;
 		padding: 30px 0px 30px 0px;
+		background-color: #fff;
+		z-index: 20;
 	}
 	// .header_descr
 	&__descr {
@@ -119,15 +121,6 @@
 		@media (min-width: 768px) {
 			&:not(:last-child) {
 				margin: 0px 35px 0px 0px;
-			}
-		}
-		&:hover {
-			&:not(:first-child) {
-				.menu__link_active {
-					&::after {
-						display: none;
-					}
-				}
 			}
 		}
 	}

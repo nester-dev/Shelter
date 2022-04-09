@@ -27,8 +27,17 @@
 }
 
 .slider-prev {
+	transition: all 0.3s ease 0s;
+	&:hover{
+		background: #FDDCC4;
+	}
 }
 .slider-next {
+	transition: all 0.3s ease 0s;
+	&:hover{
+		background: #FDDCC4;
+
+	}
 }
 
 ._icon-slider-arrow {

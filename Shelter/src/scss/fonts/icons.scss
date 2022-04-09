@@ -16,23 +16,29 @@
 }
 
 ._icon-arrow:before {
-	content: "\e900";
+  content: "\e900";
 }
 ._icon-credit-card:before {
-	content: "\e901";
+  content: "\e901";
 }
 ._icon-location:before {
-	content: "\e902";
-	color: #f1cdb3;
+  content: "\e902";
+  color: #f1cdb3;
 }
 ._icon-mail:before {
-	content: "\e903";
-	color: #f1cdb3;
+  content: "\e903";
+  color: #f1cdb3;
+}
+._icon-paggination-last:before {
+  content: "\e904";
+}
+._icon-paggination-next:before {
+  content: "\e905";
 }
 ._icon-phone:before {
-	content: "\e904";
-	color: #f1cdb3;
+  content: "\e906";
+  color: #f1cdb3;
 }
 ._icon-slider-arrow:before {
-	content: "\e905";
+  content: "\e907";
 }
