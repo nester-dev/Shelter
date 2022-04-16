@@ -29,7 +29,7 @@
 		justify-content: space-between;
 		background: #fafafa;
 		border-radius: 9px;
-		width: 64.25%;
+		width: 62.56%;
 		height: 41.66%;
 		transform: perspective(500px) translate(0, -100%) rotateX(45deg);
 		transition: all 0.7s ease 0s;
@@ -37,7 +37,7 @@
 		cursor: auto;
 		@media (max-width: 1170px) {
 			width: 630px;
-			height: 350px;
+			min-height: 350px;
 			gap: 11px;
 		}
 		@media (max-width: 730px) {

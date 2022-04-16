@@ -4,8 +4,7 @@ import { isMobile } from "./functions.js";
 import { flsModules } from "./modules.js";
 
 const body = document.querySelector("body"),
-	lockPaddingValue = window.innerWidth - document.querySelector('.wrapper').offsetWidth + "px",
-	menuLinks = document.querySelectorAll(".menu__link");
+	lockPaddingValue = window.innerWidth - document.querySelector('.wrapper').offsetWidth + "px";
 
 function isWebp() {
 	// Проверка поддержки webp
@@ -22,8 +21,20 @@ function isWebp() {
 		document.documentElement.classList.add(className);
 	});
 }
+//========================================================================================================================================================
 
 let pets = [
+	{
+		"name": "Katrine",
+		"img": "../../assets/images/katrine.png",
+		"type": "Cat",
+		"breed": "British Shorthair",
+		"description": "Katrine is a beautiful girl. She is as soft as the finest velvet with a thick lush fur. Will love you until the last breath she takes as long as you are the one. She is picky about her affection. She loves cuddles and to stretch into your hands for a deeper relaxations.",
+		"age": "6 months",
+		"inoculations": ["panleukopenia"],
+		"diseases": ["none"],
+		"parasites": ["none"]
+	},
 	{
 		"name": "Jennifer",
 		"img": "../../assets/images/jennifer.png",
@@ -32,17 +43,6 @@ let pets = [
 		"description": "Jennifer is a sweet 2 months old Labrador that is patiently waiting to find a new forever home. This girl really enjoys being able to go outside to run and play, but won't hesitate to play up a storm in the house if she has all of her favorite toys.",
 		"age": "2 months",
 		"inoculations": ["none"],
-		"diseases": ["none"],
-		"parasites": ["none"]
-	},
-	{
-		"name": "Sophia",
-		"img": "../../assets/images/sophia.png",
-		"type": "Dog",
-		"breed": "Shih tzu",
-		"description": "Sophia here and I'm looking for my forever home to live out the best years of my life. I am full of energy. Everyday I'm learning new things, like how to walk on a leash, go potty outside, bark and play with toys and I still need some practice.",
-		"age": "1 month",
-		"inoculations": ["parvovirus"],
 		"diseases": ["none"],
 		"parasites": ["none"]
 	},
@@ -58,6 +58,17 @@ let pets = [
 		"parasites": ["none"]
 	},
 	{
+		"name": "Sophia",
+		"img": "../../assets/images/sophia.png",
+		"type": "Dog",
+		"breed": "Shih tzu",
+		"description": "Sophia here and I'm looking for my forever home to live out the best years of my life. I am full of energy. Everyday I'm learning new things, like how to walk on a leash, go potty outside, bark and play with toys and I still need some practice.",
+		"age": "1 month",
+		"inoculations": ["parvovirus"],
+		"diseases": ["none"],
+		"parasites": ["none"]
+	},
+	{
 		"name": "Scarlett",
 		"img": "../../assets/images/scarlett.png",
 		"type": "Dog",
@@ -65,17 +76,6 @@ let pets = [
 		"description": "Scarlett is a happy, playful girl who will make you laugh and smile. She forms a bond quickly and will make a loyal companion and a wonderful family dog or a good companion for a single individual too since she likes to hang out and be with her human.",
 		"age": "3 months",
 		"inoculations": ["parainfluenza"],
-		"diseases": ["none"],
-		"parasites": ["none"]
-	},
-	{
-		"name": "Katrine",
-		"img": "../../assets/images/katrine.png",
-		"type": "Cat",
-		"breed": "British Shorthair",
-		"description": "Katrine is a beautiful girl. She is as soft as the finest velvet with a thick lush fur. Will love you until the last breath she takes as long as you are the one. She is picky about her affection. She loves cuddles and to stretch into your hands for a deeper relaxations.",
-		"age": "6 months",
-		"inoculations": ["panleukopenia"],
 		"diseases": ["none"],
 		"parasites": ["none"]
 	},
@@ -142,23 +142,78 @@ function addLoadedClass() {
 			document.documentElement.classList.add('loaded');
 		}, 1000);
 	});
-
 }
 
+function createPetCard(index, array) {
+	let petCard = document.createElement("div");
+	petCard.classList.add("pet-card", "popup-link");
+	let petImage = document.createElement("img");
+	petImage.classList.add("pet-card__img");
+	petImage.setAttribute("src", `img/pet-cards/${array[index].name.toLowerCase()}.png`);
+	let petName = document.createElement('h3');
+	petName.classList.add("pet-card__name");
+	petName.innerHTML = array[index].name;
+	let petCardButton = document.createElement("a");
+	petCardButton.classList.add("button", "button_light");
+	petCardButton.setAttribute('href', "#");
+	petCardButton.innerHTML = "Learn more";
+	petCard.appendChild(petImage);
+	petCard.appendChild(petName);
+	petCard.appendChild(petCardButton);
+	return petCard;
+}
+
+//==================================================================POPUP======================================================================================
 function popup() {
 	const popupLinks = document.querySelectorAll(".popup-link"),
 		popup = document.querySelector(".popup"),
-		closeIcon = document.querySelectorAll(".popup__close");
+		closeIcon = document.querySelectorAll(".popup__close"),
+		popupImage = document.querySelector(".popup__img"),
+		petName = document.querySelector(".descr__name"),
+		petBreed = document.querySelector(".descr__breed"),
+		petText = document.querySelector(".descr__text"),
+		petDescr = document.querySelectorAll('[data-info]');
 	const delay = 700;
 
 
-	popupLinks.forEach((item, index) => {
+	popupLinks.forEach(item => {
 		item.addEventListener("click", function (e) {
+			let name = item.querySelector(".pet-card__name").textContent;
+			petName.innerHTML = name;
+			popupImage.setAttribute("src", `img/pet-cards/${name.toLowerCase()}.png`);
+			petBreed.innerHTML = `${pets[findPetInfo(name)]["type"]} - ${pets[findPetInfo(name)]["breed"]}`;
+			petText.innerHTML = pets[findPetInfo(name)]["description"];
+			petDescr.forEach(element => {
+				switch (element.dataset.info) {
+					case "age":
+						element.lastChild.textContent = `: ${pets[findPetInfo(name)]["age"]}`;
+						break;
+					case "inoculations":
+						element.lastChild.textContent = `: ${pets[findPetInfo(name)]["inoculations"]}`;
+						break;
+					case "diseases":
+						element.lastChild.textContent = `: ${pets[findPetInfo(name)]["diseases"]}`;
+						break;
+					case "inocparasitesulations":
+						element.lastChild.textContent = `: ${pets[findPetInfo(name)]["parasites"]}`;
+						break;
+				}
+			});
 			popup.classList.add("popup-open");
 			bodyLock();
 			e.preventDefault();
 		});
 	});
+
+	function findPetInfo(name) {
+		let index = 0;
+		pets.forEach((item, itemIndex) => {
+			if (item["name"] == name) {
+				index = itemIndex;
+			}
+		});
+		return index;
+	}
 
 	function popupClose() {
 		popup.addEventListener('click', function (e) {
@@ -173,12 +228,13 @@ function popup() {
 	}
 	popupClose();
 }
-
+//===============================================================BURGER=========================================================================================
 
 function burger() {
 	const menuIcon = document.querySelector(".icon-menu"),
 		menuBody = document.querySelector(".menu__body"),
-		overlay = document.querySelector(".overlay");
+		overlay = document.querySelector(".overlay"),
+		menuLinks = document.querySelectorAll(".menu__link");
 
 	const delay = 300;
 
@@ -207,9 +263,15 @@ function burger() {
 			});
 		}
 	});
+	if (window.innerWidth < 768) {
+		menuLinks.forEach(item => {
+			item.addEventListener('click', menuClose);
+		});
+	}
 
 
 }
+//========================================================================================================================================================
 
 function moveLogo(delay) {
 	const logo = document.querySelector(".header__logo"),
@@ -224,72 +286,123 @@ function moveLogo(delay) {
 		}
 	}, delay);
 }
+//===============================================================SLIDER=========================================================================================
 
 function slider() {
-	const sliderItem = document.querySelectorAll('.slider-item'),
-		sliderLine = document.querySelector(".slider-line");
+	const slider = document.querySelector(".slider");
+
+	let sliderPets = pets;
 
 	let itemsPerSlide;
-	if (window.innerWidth > 1082) {
+	if (window.innerWidth > 1060) {
 		itemsPerSlide = 3;
-	} else if (window.innerWidth > 712) {
+	} else if (window.innerWidth > 766) {
 		itemsPerSlide = 2;
-	} else if (window.innerWidth < 712) {
+	} else if (window.innerWidth < 767) {
 		itemsPerSlide = 1;
 	}
 
+	window.addEventListener('resize', () => {
+		if (window.innerWidth > 1060) {
+			itemsPerSlide = 3;
+		} else if (window.innerWidth > 766) {
+			itemsPerSlide = 2;
+		} else if (window.innerWidth < 767) {
+			itemsPerSlide = 1;
+		}
+		slider.removeChild(document.querySelector(".slider-line"));
+		initSliderLine();
+	});
 	let count = 0;
 	let width;
+	let existCards = [];
 
-	function init() {
-		if (document.querySelector(".slider")) {
-			width = document.querySelector(".slider").offsetWidth;
-			sliderLine.style.width = width * sliderItem.length + 'px';
-			sliderItem.forEach((item, index) => {
-				if (itemsPerSlide == 1) {
-					sliderItem[index].style.marginRight = (width - (270 * itemsPerSlide)) / 2 + 'px';
-					sliderItem[index].style.marginLeft = (width - (270 * itemsPerSlide)) / 2 + 'px';
-				} else {
-					if ((index + 1) % itemsPerSlide !== 0) {
-						sliderItem[index].style.marginRight = (width - (270 * itemsPerSlide)) / (itemsPerSlide - 1) + 'px';
-					}
-				}
-			});
-			rollSlider();
+	function initSliderLine() {
+		existCards = [];
+		let newSliderLine = document.createElement("div");
+		newSliderLine.classList.add("slider-line");
+		for (let y = 0; y < sliderPets.length; y++) {
+			if (existCards.length == itemsPerSlide) {
+				break;
+			}
+			if (!existCards.includes(sliderPets[y].name)) {
+				existCards.push(sliderPets[y].name);
+				newSliderLine.appendChild(createPetCard(y, sliderPets));
+			}
 		}
+		slider.appendChild(newSliderLine);
+		popup();
+	}
+
+
+	function createNewLine() {
+		let newSliderLine = document.createElement("div");
+		newSliderLine.classList.add("slider-line");
+		let newPetArr = [];
+		for (let y = 0; newPetArr.length < itemsPerSlide; y++) {
+			let index = Math.floor(Math.random() * sliderPets.length);
+			if (!newPetArr.includes(sliderPets[index].name) && !existCards.includes(sliderPets[index].name)) {
+				newPetArr.push(sliderPets[index].name);
+				newSliderLine.appendChild(createPetCard(index, sliderPets));
+			}
+		}
+		existCards = newPetArr;
+		return newSliderLine;
 	}
 
 	if (document.querySelector('.slider-next')) {
 		document.querySelector('.slider-next').addEventListener('click', () => {
-			count += itemsPerSlide;
-			if (count >= sliderItem.length) {
-				count = 0;
-			}
-			rollSlider();
+			rollSliderNext();
 		});
 	}
 
 	if (document.querySelector('.slider-prev')) {
 		document.querySelector('.slider-prev').addEventListener('click', () => {
-			count -= itemsPerSlide;
-			if (count < 0) {
-				count = sliderItem.length - 1;
-			}
-			rollSlider();
+			rollSliderPrev();
 		});
 	}
 
+	function rollSliderPrev() {
+		let newSliderLine = createNewLine();
+		setTimeout(() => {
+			newSliderLine.classList.add('slider-line_left');
+			let existSliderLine = document.querySelector('.slider-line');
+			existSliderLine.classList.add("slider-line_right");
+			setTimeout(() => {
+				slider.insertBefore(newSliderLine, existSliderLine);
+				slider.removeChild(existSliderLine);
+				setTimeout(() => {
+					document.querySelector(".slider-line").classList.remove("slider-line_left");
+				}, 100);
+				popup();
+			}, 100);
+		}, 100);
 
-	function rollSlider() {
-		sliderLine.style.transform = 'translate(-' + count / itemsPerSlide * width + 'px)';
 	}
 
-	window.addEventListener('resize', init);
+	function rollSliderNext() {
+		let newSliderLine = createNewLine();
+		setTimeout(() => {
+			newSliderLine.classList.add('slider-line_right');
+			let existSliderLine = document.querySelector('.slider-line');
+			existSliderLine.classList.add("slider-line_left");
+			setTimeout(() => {
+				slider.appendChild(newSliderLine);
+				slider.removeChild(existSliderLine);
+				setTimeout(() => {
+					document.querySelector(".slider-line").classList.remove("slider-line_right");
+				}, 100);
+				popup();
+			}, 100);
+		}, 100);
 
-	init();
+	}
+
+	initSliderLine();
 	popup();
 }
 
+//=================================================================PAGINATION=======================================================================================
 function paggination() {
 	const content = document.querySelector(".paggination__content"),
 		firstPage = document.querySelector(".nav__item_first-page"),
@@ -329,25 +442,6 @@ function paggination() {
 
 	shuffle(petsArr);
 
-	function createPetCard(index) {
-		let petCard = document.createElement("div");
-		petCard.classList.add("pet-card", "popup-link");
-		let petImage = document.createElement("img");
-		petImage.classList.add("pet-card__img");
-		petImage.setAttribute("src", `img/pet-cards/${petsArr[index].name.toLowerCase()}.png`);
-		let petName = document.createElement('h3');
-		petName.classList.add("pet-card__name");
-		petName.innerHTML = petsArr[index].name;
-		let petCardButton = document.createElement("a");
-		petCardButton.classList.add("button", "button_light");
-		petCardButton.setAttribute('href', "#");
-		petCardButton.innerHTML = "Learn more";
-		petCard.appendChild(petImage);
-		petCard.appendChild(petName);
-		petCard.appendChild(petCardButton);
-		return petCard;
-	}
-
 	function init() {
 		for (let x = 0; x < pageCount; x++) {
 			let wrapper = document.createElement('div');
@@ -364,7 +458,7 @@ function paggination() {
 					}
 					if (!petsUsed.includes(petsArr[y].name)) {
 						petsUsed.push(petsArr[y].name);
-						wrapper.appendChild(createPetCard(y));
+						wrapper.appendChild(createPetCard(y, petsArr));
 						petsArr.splice(y, 1);
 					}
 				}
@@ -420,7 +514,6 @@ function paggination() {
 			}, 100);
 			popup();
 		}, 100);
-
 	}
 
 	if (paginationBar) {
@@ -458,11 +551,15 @@ function paggination() {
 	init();
 	popup();
 }
-
+//========================================================================================================================================================
 
 isWebp();
 burger();
 addLoadedClass();
-slider();
-paggination();
+if (document.querySelector(".slider")) {
+	slider();
+}
+if (document.querySelector(".paggination")) {
+	paggination();
+}
 
