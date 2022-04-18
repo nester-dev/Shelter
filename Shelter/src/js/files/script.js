@@ -313,8 +313,6 @@ function slider() {
 		slider.removeChild(document.querySelector(".slider-line"));
 		initSliderLine();
 	});
-	let count = 0;
-	let width;
 	let existCards = [];
 
 	function initSliderLine() {
@@ -411,13 +409,7 @@ function paggination() {
 		lastPage = document.querySelector(".nav__item_last-page"),
 		currentPage = document.querySelector(".current-page"),
 		paginationBar = document.querySelector(".paggination__nav");
-	let petsArr = [];
 
-	pets.forEach(element => {
-		for (let i = 0; i < 6; i++) {
-			petsArr.push(element);
-		}
-	});
 
 	let cardsOnPage;
 	if (window.innerWidth > 1296) {
@@ -429,20 +421,43 @@ function paggination() {
 	}
 
 	let page = 1;
-	let count = 1;
-	let pageCount = Math.ceil(petsArr.length / cardsOnPage);
-	let contentIndex = {};
+	let count;
+	let pageCount;
+	let contentIndex;
 
-	function shuffle(array) {
-		for (let i = array.length - 1; i > 0; i--) {
-			let j = Math.floor(Math.random() * (i + 1));
-			[array[i], array[j]] = [array[j], array[i]];
-		}
-	}
+	//function shuffle(array) {
+	//	for (let i = array.length - 1; i > 0; i--) {
+	//		let j = Math.floor(Math.random() * (i + 1));
+	//		[array[i], array[j]] = [array[j], array[i]];
+	//	}
+	//}
 
-	shuffle(petsArr);
+
+
+	window.addEventListener('resize', () => {
+		content.removeChild(document.querySelector(".paggination__wrapper"));
+		init();
+	});
 
 	function init() {
+		let petsArr = [];
+		for (let i = 0; i < 6; i++) {
+			for (let x = 0; x < pets.length; x++) {
+				petsArr.push(pets[x]);
+			}
+		}
+		contentIndex = {};
+		count = 1;
+		if (window.innerWidth > 1279) {
+			cardsOnPage = 8;
+			pageCount = Math.ceil(petsArr.length / cardsOnPage);
+		} else if (window.innerWidth > 639) {
+			cardsOnPage = 6;
+			pageCount = Math.ceil(petsArr.length / cardsOnPage);
+		} else if (window.innerWidth < 640) {
+			cardsOnPage = 3;
+			pageCount = Math.ceil(petsArr.length / cardsOnPage);
+		}
 		for (let x = 0; x < pageCount; x++) {
 			let wrapper = document.createElement('div');
 			if (x == 0) {
@@ -450,23 +465,16 @@ function paggination() {
 			} else {
 				wrapper.classList.add("paggination__wrapper");
 			}
-			let petsUsed = [];
 			for (let i = 0; i < cardsOnPage; i++) {
-				for (let y = 0; y < petsArr.length; y++) {
-					if (petsUsed.length == cardsOnPage) {
-						break;
-					}
-					if (!petsUsed.includes(petsArr[y].name)) {
-						petsUsed.push(petsArr[y].name);
-						wrapper.appendChild(createPetCard(y, petsArr));
-						petsArr.splice(y, 1);
-					}
-				}
+				console.log(petsArr);
+				wrapper.appendChild(createPetCard(0, petsArr));
+				petsArr.splice(0, 1);
 			}
 			contentIndex[count] = wrapper;
 			count++;
 		}
 		content.appendChild(contentIndex[1]);
+		popup();
 	}
 
 	function removeClassVisible(item) {
@@ -549,7 +557,6 @@ function paggination() {
 		});
 	}
 	init();
-	popup();
 }
 //========================================================================================================================================================
 
