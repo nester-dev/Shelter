@@ -163,6 +163,13 @@ function createPetCard(index, array) {
 	return petCard;
 }
 
+function shuffle(array) {
+	for (let i = array.length - 1; i > 0; i--) {
+		let j = Math.floor(Math.random() * (i + 1));
+		[array[i], array[j]] = [array[j], array[i]];
+	}
+}
+
 //==================================================================POPUP======================================================================================
 function popup() {
 	const popupLinks = document.querySelectorAll(".popup-link"),
@@ -316,6 +323,7 @@ function slider() {
 	let existCards = [];
 
 	function initSliderLine() {
+		shuffle(sliderPets);
 		existCards = [];
 		let newSliderLine = document.createElement("div");
 		newSliderLine.classList.add("slider-line");
@@ -425,38 +433,34 @@ function paggination() {
 	let pageCount;
 	let contentIndex;
 
-	//function shuffle(array) {
-	//	for (let i = array.length - 1; i > 0; i--) {
-	//		let j = Math.floor(Math.random() * (i + 1));
-	//		[array[i], array[j]] = [array[j], array[i]];
-	//	}
-	//}
-
-
-
 	window.addEventListener('resize', () => {
 		content.removeChild(document.querySelector(".paggination__wrapper"));
 		init();
 	});
 
 	function init() {
-		let petsArr = [];
+		let petsArr = pets;
+		console.log(petsArr);
+
+		let newArr = [];
 		for (let i = 0; i < 6; i++) {
-			for (let x = 0; x < pets.length; x++) {
-				petsArr.push(pets[x]);
+			shuffle(petsArr);
+			for (let x = 0; x < petsArr.length; x++) {
+				newArr.push(petsArr[x]);
 			}
 		}
+		console.log(newArr);
 		contentIndex = {};
 		count = 1;
 		if (window.innerWidth > 1279) {
 			cardsOnPage = 8;
-			pageCount = Math.ceil(petsArr.length / cardsOnPage);
+			pageCount = Math.ceil(newArr.length / cardsOnPage);
 		} else if (window.innerWidth > 639) {
 			cardsOnPage = 6;
-			pageCount = Math.ceil(petsArr.length / cardsOnPage);
+			pageCount = Math.ceil(newArr.length / cardsOnPage);
 		} else if (window.innerWidth < 640) {
 			cardsOnPage = 3;
-			pageCount = Math.ceil(petsArr.length / cardsOnPage);
+			pageCount = Math.ceil(newArr.length / cardsOnPage);
 		}
 		for (let x = 0; x < pageCount; x++) {
 			let wrapper = document.createElement('div');
@@ -466,9 +470,8 @@ function paggination() {
 				wrapper.classList.add("paggination__wrapper");
 			}
 			for (let i = 0; i < cardsOnPage; i++) {
-				console.log(petsArr);
-				wrapper.appendChild(createPetCard(0, petsArr));
-				petsArr.splice(0, 1);
+				wrapper.appendChild(createPetCard(0, newArr));
+				newArr.splice(0, 1);
 			}
 			contentIndex[count] = wrapper;
 			count++;
