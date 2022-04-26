@@ -21,6 +21,12 @@
 		justify-content: center;
 		align-items: center;
 		cursor: pointer;
+		&:hover{
+			.popup__close {
+				transition: all 0.4s ease 0s;
+				background: #FDDCC4;
+			}
+		}
 	}
 	// .popup__content
 	&__content {
@@ -42,6 +48,15 @@
 		}
 		@media (max-width: 730px) {
 			width: 240px;
+		}
+		&:hover{
+			.popup__close {
+				background: transparent;
+				&:hover{
+					transition: all 0.4s ease 0s;
+					background: #FDDCC4;
+				}
+			}
 		}
 	}
 	// .popup__close
@@ -73,9 +88,6 @@
 		}
 		@media (max-width: 730px) {
 			right: -30px;
-		}
-		&:hover{
-			background: #FDDCC4;
 		}
 	}
 

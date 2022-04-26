@@ -439,17 +439,14 @@ function paggination() {
 	});
 
 	function init() {
-		let petsArr = pets;
-		console.log(petsArr);
-
-		let newArr = [];
+		let petsArr = [];
 		for (let i = 0; i < 6; i++) {
-			shuffle(petsArr);
-			for (let x = 0; x < petsArr.length; x++) {
-				newArr.push(petsArr[x]);
+			for (let x = 0; x < pets.length; x++) {
+				petsArr.push(pets[x]);
 			}
 		}
-		console.log(newArr);
+
+		let newArr = petsArr.slice();
 		contentIndex = {};
 		count = 1;
 		if (window.innerWidth > 1279) {
@@ -469,9 +466,11 @@ function paggination() {
 			} else {
 				wrapper.classList.add("paggination__wrapper");
 			}
+			let temp = petsArr.splice(0, cardsOnPage);
+			shuffle(temp);
 			for (let i = 0; i < cardsOnPage; i++) {
-				wrapper.appendChild(createPetCard(0, newArr));
-				newArr.splice(0, 1);
+				wrapper.appendChild(createPetCard(i, temp));
+				newArr.splice(0, cardsOnPage);
 			}
 			contentIndex[count] = wrapper;
 			count++;
